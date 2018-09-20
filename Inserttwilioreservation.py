@@ -47,14 +47,14 @@ def InsertArrivalDeparture(request):
         if  dep_date >= arr_date :    
             if dep_date <= restrict_days:
                sql_value = gensql('insert','reservation',d)
-               return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Validation Success','ReturnCode':'Valid'}, sort_keys=True, indent=4))
+               return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Validation Success','ReturnCode':'Valid'}], sort_keys=True, indent=4))
             else:   
-               return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Date restriction','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
+               return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Date restriction','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
         else:
             
-           return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Departure should not be before arrival','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
+           return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Departure should not be before arrival','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
     else:
         
-         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Please choose upcoming days arrival date','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
+         return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Please choose upcoming days arrival date','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
 
 
