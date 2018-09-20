@@ -1,7 +1,7 @@
 from sqlwrapper import gensql,dbget,dbput
 import json
 import datetime
-from datetime import datetime, timedelta
+#from datetime 
 import random
 def Inserttwilioreservation(request):
     d = request.json
@@ -18,7 +18,7 @@ def Inserttwilioreservation(request):
     return(json.dumps([{"Return":"Record Inserted Succcessfully","Returncode":"RIS","Status":"Success","Statuscode":200,"confirmation_number":confirmation}],indent=2))
 
 def InsertArrivalDeparture(request):
-    n  = 90
+    
     d = request.json
     print(d)
     #e = { k : v for k,v in d.items() if v = '' }       
@@ -35,18 +35,26 @@ def InsertArrivalDeparture(request):
     '''
     data1 = d.get('arrival')
     data2 = d.get('departure')
-    restrict_days =  datetime.now() - timedelta(days=N)
-    charges_begin_date = datetime.datetime.strptime(data1, '%Y-%m-%d').date()
-    charges_end_date = datetime.datetime.strptime(data2, '%Y-%m-%d').date()
-    print("str2",charges_begin_date,charges_end_date,type(charges_end_date))
+    arr_date = datetime.datetime.strptime(data1, '%Y-%m-%d').date()
+    dep_date = datetime.datetime.strptime(data2, '%Y-%m-%d').date()
+    #print(type(data))
+    restrict_days =  today_date + datetime.timedelta(days=90)
+    print(restrict_days)
+    #charges_end_date = datetime.datetime.strptime(data2, '%Y-%m-%d').date()
+    #print("str2",charges_begin_date,charges_end_date,type(charges_end_date))
     
-    if data1 >= today_date :
-        if  data2 >= data1 :    
-            if restrict_days >= data1:
+    if arr_date >= today_date:
+        if  dep_date >= arr_date :    
+            if dep_date <= restrict_days:
                sql_value = gensql('insert','reservation',d)
-            return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Validated','ReturnCode':'Valid'}, sort_keys=True, indent=4))
-
-        return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Departure should not be before arrival','ReturnCode':'RIS'}, sort_keys=True, indent=4))
-    return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Invalid','Please choose upcoming days arrival date':'Invalid'}, sort_keys=True, indent=4))
+               return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Record Inserted Successfully','ReturnCode':'RIS'}, sort_keys=True, indent=4))
+            else:   
+               return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Date restriction','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
+        else:
+            
+           return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Departure should not be before arrival','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
+    else:
+        
+         return(json.dumps({'Status': 'Success', 'StatusCode': '200','Return': 'Please choose upcoming days arrival date','ReturnCode':'Invalid'}, sort_keys=True, indent=4))
 
 
