@@ -3,6 +3,7 @@ import json
 import datetime
 #from datetime 
 import random
+import urllib
 def Inserttwilioreservation(request):
     d = request.json
     
@@ -47,14 +48,60 @@ def InsertArrivalDeparture(request):
         if  dep_date >= arr_date :    
             if dep_date <= restrict_days:
                sql_value = gensql('insert','reservation',d)
-               return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Validation Success','ReturnCode':'Valid'}], sort_keys=True, indent=4))
+               return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Given dates are valid','ReturnCode':'Valid'}], sort_keys=True, indent=4))
             else:   
-               return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Date restriction','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
+               return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'departure date should not exceed 90 days than arrival','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
         else:
             
-           return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Departure should not be before arrival','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
+           return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Departure date should not be in past date than arrival','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
     else:
         
-         return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Please choose upcoming days arrival date','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
+         return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'arrival date must be scheduled atleast one day in advance','ReturnCode':'Invalid'}], sort_keys=True, indent=4))
 
 
+def Modifytwilioreservation(request):
+    d = request.json
+    a = { k : v for k,v in d.items() if v != '' if k not in ('confirmation_number')}
+    print(a)
+    e = { k : v for k,v in d.items() if k != '' if k in ('confirmation_number')}
+    print(e)
+    sql_value = gensql('update','reservation',a,e)
+    print(sql_value)
+    conf = e.get('confirmation_number')
+    sql = dbput("update reservation set modification = 'yes' where confirmation_number = '"+conf+"'")
+    return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Record Updated Successfully','ReturnCode':'RUS'}], sort_keys=True, indent=4))
+
+def Canceltwilioreservation(request):
+    d  = request.json
+    conf = d.get('confirmation_number')
+    status = 'Cancelled'
+
+    sql = dbput("update reservation set status = '"+status+"' where confirmation_number = '"+conf+"'")
+    print(sql)
+    
+    return(json.dumps([{'Status': 'Success', 'StatusCode': '200','Return': 'Your booking has been cancelled','ReturnCode':'RCS'}], sort_keys=True, indent=4))
+
+def Smstwilioservice(request):
+     countrycode = request.json['countrycode']
+     #print(countrycode)
+     name = "Customer"
+     phone = request.json['mobile']
+     message = request.json['message']
+     conf_no = request.json['confirmation_number']
+     hotel_name = 'dubakur hotel'
+     arrival = request.json['arrival']
+     depature = request.json['departure']
+     room_type = request.json['roomtype']
+     all_message = ("Dear "+name+", "+message+".  Confirmation Number is "+conf_no+", Arrival Date: "+arrival+", Depature Date:"+depature+", Room Type:"+room_type+". by "+hotel_name+"")
+     url = "https://control.msg91.com/api/sendhttp.php?authkey=195833ANU0xiap5a708d1f&mobiles="+phone+"&message="+all_message+"&sender=Infoit&route=4&country="+countrycode+""
+     req = urllib.request.Request(url)
+     with urllib.request.urlopen(req) as response:
+         the_page = response.read()
+         the_page = the_page[1:]
+         print(the_page)
+         the_page = str(the_page)
+     sql = dbput("update reservation set sms = 'success' where confirmation_number = '"+conf_no+"'")
+     print(sql)
+     return(json.dumps([{"Return":"SMS Sent Successfully","Return_Code":"SSS","Status": "Success","Status_Code": "200","Key":the_page}],indent =2))
+
+ 
