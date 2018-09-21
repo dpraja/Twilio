@@ -8,7 +8,18 @@ def Inserttwilioreservation(request):
     d = request.json
     
     roomtype = request.json['roomtype']
+    arr = request.json['arrival']
+    dep = request.json['departure']
+    #arr = arr.strftime("%Y-%m-%d")
+    #dep = dep.strftime("%Y-%m-%d")
+    arr_date = datetime.datetime.strptime(arr, '%d-%m-%Y').date()
+    dep_date = datetime.datetime.strptime(dep, '%d-%m-%Y').date()
     confir = (random.randint(100000,999999))
+    print(arr_date,dep_date)
+    arr = arr_date.strftime("%Y-%m-%d")
+    dep = dep_date.strftime("%Y-%m-%d")
+    d['arrival'] = arr
+    d['departure'] = dep
     d['confirmation_number'] = confir
     d['modification'] = "No"
     d['status'] = "Reserved"
@@ -36,14 +47,19 @@ def InsertArrivalDeparture(request):
     '''
     data1 = d.get('arrival')
     data2 = d.get('departure')
-    arr_date = datetime.datetime.strptime(data1, '%Y-%m-%d').date()
-    dep_date = datetime.datetime.strptime(data2, '%Y-%m-%d').date()
-    #print(type(data))
+    arr_date = datetime.datetime.strptime(data1, '%d-%m-%Y').date()     #datetime format
+    dep_date = datetime.datetime.strptime(data2, '%d-%m-%Y').date()
+    arr_date = arr_date.strftime("%Y-%m-%d")                             #formatted string datetime
+    dep_date = dep_date.strftime("%Y-%m-%d")
+    arr_date = datetime.datetime.strptime(arr_date, '%Y-%m-%d').date()   #convert string to datetime format
+    dep_date = datetime.datetime.strptime(dep_date, '%Y-%m-%d').date()
+    print(arr_date,dep_date)
     restrict_days =  today_date + datetime.timedelta(days=90)
     print(restrict_days)
     #charges_end_date = datetime.datetime.strptime(data2, '%Y-%m-%d').date()
     #print("str2",charges_begin_date,charges_end_date,type(charges_end_date))
-    
+    d['arrival'] = arr_date
+    d['departure'] = dep_date
     if arr_date >= today_date:
         if  dep_date >= arr_date :    
             if dep_date <= restrict_days:
@@ -61,10 +77,15 @@ def InsertArrivalDeparture(request):
 
 def Modifytwilioreservation(request):
     d = request.json
+    #for i in d:
+    # for k,v in i.items():
+     # if v['arrival'] is not '':
+           
     a = { k : v for k,v in d.items() if v != '' if k not in ('confirmation_number')}
     print(a)
     e = { k : v for k,v in d.items() if k != '' if k in ('confirmation_number')}
     print(e)
+    
     sql_value = gensql('update','reservation',a,e)
     print(sql_value)
     conf = e.get('confirmation_number')
