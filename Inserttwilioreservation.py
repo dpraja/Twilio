@@ -126,3 +126,13 @@ def Smstwilioservice(request):
      return(json.dumps([{"Return":"SMS Sent Successfully","Return_Code":"SSS","Status": "Success","Status_Code": "200","Key":the_page}],indent =2))
 
  
+def CheckConfirmation(request):
+     
+     conf_no = request.json['confirmation_number']
+     sql = json.loads(dbget("select count(*) from reservation where confirmation_number='"+conf_no+"'"))
+     psql = json.loads(dbget("select count(*) from reservation where confirmation_number='"+conf_no+"' and status in ('Reserved')"))
+     print(psql)
+     if sql[0]['count'] > 0 and psql[0]['count'] > 0 :
+         return(json.dumps([{"Return":"Confirmation number already exist","Return_Code":"Valid","Status": "Success","Status_Code": "200"}],indent =2))
+     else:
+         return(json.dumps([{"Return":"Confirmation number does not exist","Return_Code":"Invalid","Status": "Success","Status_Code": "200"}],indent =2))
