@@ -1,17 +1,17 @@
 from sqlwrapper import gensql,dbget,dbput
 import json
 import datetime
-#from datetime 
 import random
 import urllib
+from dateutil import parser
 def Inserttwilioreservation(request):
     d = request.json
     
     roomtype = request.json['roomtype']
     arr = request.json['arrival']
     dep = request.json['departure']
-    #arr = arr.strftime("%Y-%m-%d")
-    #dep = dep.strftime("%Y-%m-%d")
+    arr = parser.parse(arr).date().strftime('%d-%m-%Y')
+    dep = parser.parse(dep).date().strftime('%d-%m-%Y')
     arr_date = datetime.datetime.strptime(arr, '%d-%m-%Y').date()
     dep_date = datetime.datetime.strptime(dep, '%d-%m-%Y').date()
     confir = (random.randint(100000,999999))
@@ -47,6 +47,8 @@ def InsertArrivalDeparture(request):
     '''
     data1 = d.get('arrival')
     data2 = d.get('departure')
+    date1 = parser.parse(data1).date().strftime('%d-%m-%Y')
+    date2 = parser.parse(date2).date().strftime('%d-%m-%Y')    
     arr_date = datetime.datetime.strptime(data1, '%d-%m-%Y').date()     #datetime format
     dep_date = datetime.datetime.strptime(data2, '%d-%m-%Y').date()
     arr_date = arr_date.strftime("%Y-%m-%d")                             #formatted string datetime
