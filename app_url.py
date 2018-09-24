@@ -10,6 +10,10 @@ from Inserttwilioreservation import CheckConfirmation
 app = Flask(__name__)
 CORS(app)
 
+@app.route('/',methods=['GET'])
+def hello():
+   return ("Hello Twilio")
+
 @app.route('/Inserttwilioreservation',methods=['POST'])
 def reservation():
    return Inserttwilioreservation(request)
