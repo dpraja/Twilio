@@ -34,5 +34,5 @@ def Smstwilioservice_all():
 def CheckConfirmation_all():
    return CheckConfirmation(request)
 if __name__ == "__main__":
-  #app.run(debug=True)
-  app.run(host="192.168.56.1",port=5000)
+  app.run(debug=True)
+  #app.run(host="192.168.56.1",port=5000)
