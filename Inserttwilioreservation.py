@@ -48,9 +48,9 @@ def InsertArrivalDeparture(request):
     data1 = d.get('arrival')
     data2 = d.get('departure')
     date1 = parser.parse(data1).date().strftime('%d-%m-%Y')
-    date2 = parser.parse(date2).date().strftime('%d-%m-%Y')    
-    arr_date = datetime.datetime.strptime(data1, '%d-%m-%Y').date()     #datetime format
-    dep_date = datetime.datetime.strptime(data2, '%d-%m-%Y').date()
+    date2 = parser.parse(data2).date().strftime('%d-%m-%Y')    
+    arr_date = datetime.datetime.strptime(date1, '%d-%m-%Y').date()     #datetime format
+    dep_date = datetime.datetime.strptime(date2, '%d-%m-%Y').date()
     arr_date = arr_date.strftime("%Y-%m-%d")                             #formatted string datetime
     dep_date = dep_date.strftime("%Y-%m-%d")
     arr_date = datetime.datetime.strptime(arr_date, '%Y-%m-%d').date()   #convert string to datetime format
