@@ -114,8 +114,13 @@ def Smstwilioservice(request):
      hotel_name = 'dubakur hotel'
      arrival = request.json['arrival']
      depature = request.json['departure']
+        
+     arrival = parser.parse(arrival).date().strftime('%d-%m-%Y')
+     depature = parser.parse(depature).date().strftime('%d-%m-%Y')        
+      
+    
      room_type = request.json['roomtype']
-     all_message = ("Dear "+name+", "+message+".  Confirmation Number is "+conf_no+", Arrival Date: "+arrival+", Depature Date:"+depature+", Room Type:"+room_type+". by "+hotel_name+"")
+     all_message = ("Dear "+name+", "+message+".  Confirmation Number is "+conf_no+", Arrival Date: "+str(arrival)+", Depature Date:"+str(depature)+", Room Type:"+room_type+". by "+hotel_name+"")
      url = "https://control.msg91.com/api/sendhttp.php?authkey=195833ANU0xiap5a708d1f&mobiles="+phone+"&message="+all_message+"&sender=Infoit&route=4&country="+countrycode+""
      req = urllib.request.Request(url)
      with urllib.request.urlopen(req) as response:
