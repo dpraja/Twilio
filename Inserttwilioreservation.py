@@ -79,14 +79,23 @@ def InsertArrivalDeparture(request):
 
 def Modifytwilioreservation(request):
     d = request.json
-    #for i in d:
-    # for k,v in i.items():
-     # if v['arrival'] is not '':
            
-    a = { k : v for k,v in d.items() if v != '' if k not in ('confirmation_number')}
+    a = { k : v for k,v in d.items() if v != '' if k not in ('confirmation_number','arrival','departure')}
     print(a)
     e = { k : v for k,v in d.items() if k != '' if k in ('confirmation_number')}
     print(e)
+
+    data1 = d.get('arrival')
+    data2 = d.get('departure')
+    date1 = parser.parse(data1).date().strftime('%d-%m-%Y')
+    date2 = parser.parse(data2).date().strftime('%d-%m-%Y')    
+    arr_date = datetime.datetime.strptime(date1, '%d-%m-%Y').date()     #datetime format
+    dep_date = datetime.datetime.strptime(date2, '%d-%m-%Y').date()
+    a['arrival'] = arr_date.strftime("%Y-%m-%d")                             #formatted string datetime
+    a['departure'] = dep_date.strftime("%Y-%m-%d")
+    #a['arrival'] = parser.parse(d['arrival']).date().strftime('%d-%m-%Y')
+    #a['departure'] = parser.parse(d['departure']).date().strftime('%d-%m-%Y')
+
     
     sql_value = gensql('update','reservation',a,e)
     print(sql_value)
