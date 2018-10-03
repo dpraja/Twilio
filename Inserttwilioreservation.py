@@ -123,7 +123,7 @@ def Smstwilioservice(request):
      phone = request.json['mobile']
      message = request.json['message']
      conf_no = request.json['confirmation_number']
-     hotel_name = 'dubakur hotel'
+     hotel_name = 'Konnect24/7 Hotel'
      arrival = request.json['arrival']
      depature = request.json['departure']
         
