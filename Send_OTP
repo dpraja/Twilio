@@ -3,9 +3,9 @@ import urllib
 import psycopg2
 import random
 import json
-app = Flask(__name__)
-@app.route("/send_sms_OTP",methods=['POST'])
-def index():
+
+
+def index(request):
     mobile = request.json['mobile']
     authkey_msg91 = '195833ANU0xiap5a708d1f'
     c = random.randint(0,99999999)
@@ -23,9 +23,7 @@ def index():
        test = json.loads(test)
     return json.dumps([(test)])
     
-if __name__ == "__main__":
-    #app.run(host="192.168.1.6",port=5000)
-    app.run(debug=False, port=port, host='0.0.0.0')
+
     
 
 
