@@ -7,12 +7,17 @@ from Inserttwilioreservation import Modifytwilioreservation
 from Inserttwilioreservation import Canceltwilioreservation
 from Inserttwilioreservation import Smstwilioservice
 from Inserttwilioreservation import CheckConfirmation
+from Send_OTP import index
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/',methods=['GET'])
 def hello():
    return ("Hello Twilio")
+
+@app.route('/SMS_OTP',methods=['POST'])
+def indexotp():
+   return index(request)
 
 @app.route('/Inserttwilioreservation',methods=['POST'])
 def reservation():
