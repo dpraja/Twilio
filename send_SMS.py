@@ -3,7 +3,7 @@ import urllib
 import psycopg2
 import json
 
-def indexsendSMS():
+def indexsendSMS(request):
     message = request.json['message']
     mobile_number = request.json['mobile_number']
     authkey_msg91 = '195833ANU0xiap5a708d1f'
