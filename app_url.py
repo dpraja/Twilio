@@ -17,13 +17,13 @@ CORS(app)
 def hello():
    return ("Hello Twilio")
 
-@app.route('/SMS_OTP',methods=['POST'])
+@app.route('/send_OTP',methods=['POST'])
 def indexotp():
-   return indexverifyOTP(request)
+   return index(request)
 
 @app.route('/SMS_verify_OTP',methods=['POST'])
 def verify():
-   return index(request)
+   return indexverifyOTP(request)
 
 @app.route('/send_SMS_conf',methods=['POST'])
 def sendSMS():
