@@ -10,6 +10,8 @@ from Inserttwilioreservation import CheckConfirmation
 from Send_OTP import index
 from verify_OTP import indexverifyOTP
 from send_SMS import indexsendSMS
+from txt_to_pdf import genpdf
+
 app = Flask(__name__)
 CORS(app)
 
@@ -28,6 +30,10 @@ def verify():
 @app.route('/send_SMS_conf',methods=['POST'])
 def sendSMS():
    return indexsendSMS(request)
+
+@app.route('/getting_pdf',methods=['POST'])
+def pdffun():
+   return genpdf(request)
 
 @app.route('/Inserttwilioreservation',methods=['POST'])
 def reservation():
