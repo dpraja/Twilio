@@ -1,12 +1,12 @@
 from fpdf import FPDF, HTMLMixin
  
-class HTML2PDF(FPDF, HTMLMixin):
-    pass
+def genpdf():
+            
+    class HTML2PDF(FPDF, HTMLMixin):
+        pass
 
-    
-pdf = HTML2PDF()
-
-def genpdf(request):
+        
+    pdf = HTML2PDF()
     name="Aravindh"
     hotel_name = "Hilton Hotel"
     address = "No:5, First cross street,Chennai-600 001."
@@ -76,6 +76,8 @@ def genpdf(request):
     pdf.cell(10)
     pdf.cell(0, 5, 'Hotel Manager', ln=1, align="L")
 
-    pdf.output('htmlllllllllllllllllllllllllllll.pdf','F')
+    pdf.output('booking_confirmation_pdf_file.pdf','F')
+
+    return json.dumps({"Return":"sucess"})
 
     
