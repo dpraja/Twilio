@@ -6,7 +6,7 @@ class HTML2PDF(FPDF, HTMLMixin):
     
 pdf = HTML2PDF()
 
-def genpdf():
+def genpdf(request):
     name="Aravindh"
     hotel_name = "Hilton Hotel"
     address = "No:5, First cross street,Chennai-600 001."
