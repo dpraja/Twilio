@@ -7,7 +7,7 @@ def genpdf():
 
         
     pdf = HTML2PDF()
-    name="Aravindh"
+    name="Customer"
     hotel_name = "Hilton Hotel"
     address = "No:5, First cross street,Chennai-600 001."
     mobile_no = "9677577914"
