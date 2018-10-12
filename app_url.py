@@ -60,7 +60,7 @@ def CheckConfirmation_all():
 
 
 #------------------------------------
-@app.route("/hello",methods=['POST'])
+@app.route("/infocuitchat",methods=['POST'])
 def bot():
    return fun(request)
 if __name__ == "__main__":
