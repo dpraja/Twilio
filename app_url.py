@@ -11,7 +11,7 @@ from Send_OTP import index
 from verify_OTP import indexverifyOTP
 from send_SMS import indexsendSMS
 from txt_to_pdf import genpdf
-from sentiment import sentiment
+
 #---------------------------------------------------
 from botinsert import fun
 app = Flask(__name__)
@@ -24,10 +24,6 @@ def hello():
 @app.route('/send_OTP',methods=['POST'])
 def indexotp():
    return index(request)
-
-@app.route('/sentiment',methods=['POST'])
-def sentiments():
-   return sentiment(request)
 
 @app.route('/SMS_verify_OTP',methods=['POST'])
 def verify():
