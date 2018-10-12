@@ -13,3 +13,4 @@ Flask-Cors==3.0.3
 APScheduler==3.5.1
 python-dateutil==2.6.1
 fpdf==1.7.2
+boto3==1.7.23
