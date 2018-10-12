@@ -11,7 +11,8 @@ from Send_OTP import index
 from verify_OTP import indexverifyOTP
 from send_SMS import indexsendSMS
 from txt_to_pdf import genpdf
-
+#---------------------------------------------------
+from botinsert import fun
 app = Flask(__name__)
 CORS(app)
 
@@ -54,6 +55,14 @@ def Smstwilioservice_all():
 @app.route('/CheckConfirmation',methods=['POST'])
 def CheckConfirmation_all():
    return CheckConfirmation(request)
+
+
+
+
+#------------------------------------
+@app.route("/hello",methods=['POST'])
+def bot():
+   return fun(request)
 if __name__ == "__main__":
   app.run(debug=True)
   #app.run(host="192.168.56.1",port=5000)
