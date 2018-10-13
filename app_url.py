@@ -11,7 +11,6 @@ from Send_OTP import index
 from verify_OTP import indexverifyOTP
 from send_SMS import indexsendSMS
 from txt_to_pdf import genpdf
-from sentiment import index_sent
 
 #---------------------------------------------------
 from botinsert import fun
