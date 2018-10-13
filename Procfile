@@ -6,4 +6,3 @@ worker: gunicorn send_SMS.py
 worker: gunicorn verify_OTP.py
 worker: gunicorn txt_to_pdf.py
 worker: gunicorn botinsert.py
-worker: gunicorn sentiment.py
