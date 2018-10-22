@@ -11,6 +11,8 @@ from Send_OTP import index
 from verify_OTP import indexverifyOTP
 from send_SMS import indexsendSMS
 from txt_to_pdf import genpdf
+#sentiment
+from sentiment_insert import sentiment
 
 #---------------------------------------------------
 from botinsert import fun
@@ -64,6 +66,13 @@ def CheckConfirmation_all():
 @app.route("/infocuitchat",methods=['POST'])
 def bot():
    return fun(request)
+
+#sentiment
+
+@app.route('/sentiment',methods=['POST'])
+def test():
+   return sentiment(request)
+
 if __name__ == "__main__":
   app.run(debug=True)
   #app.run(host="192.168.56.1",port=5000)
