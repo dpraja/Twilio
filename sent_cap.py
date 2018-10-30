@@ -28,8 +28,8 @@ def sent(request):
      d['cus_date'] = cus_date 
      access = request.json['aws_access_key_id']
      secret = request.json['aws_secret_key']
-     d['sentiment'] = sen_test(d['transcript_text'],access,secret)
-     
+     sendforsentiment = sen_test(d['transcript_text'],access,secret)
+     d['sentiment'] = sendforsentiment
      print('asdf',d['sentiment'])
      gensql('insert', 'sentiment.sentiment',d)
      return(json.dumps({'Status': 'Success','Message': 'Data Insert Sucessfully'},indent=4))
