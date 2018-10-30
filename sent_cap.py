@@ -26,9 +26,9 @@ def sent(request):
      #e = {k:v for k,v in d.items() if k not in ('sentiment')}
      cus_date = datetime.datetime.utcnow()
      d['cus_date'] = cus_date
-     d['sentiment'] = sen_test(d['transcript_text'])
-     d['aws_access_key'] = sen_test(d['aws_access_key_id'])
-     d['aws_secret_key'] = sen_test(d['aws_secret_key'])
+     d['sentiment'] = sen_test(d['transcript_text'],d['aws_access_key_id'],d['aws_secret_key'])
+     #d['aws_access_key'] = sen_test(d['aws_access_key_id'])
+     #d['aws_secret_key'] = sen_test(d['aws_secret_key'])
      
      print('asdf',d['sentiment'])
      gensql('insert', 'sentiment.sentiment',d)
