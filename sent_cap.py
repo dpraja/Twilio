@@ -23,7 +23,7 @@ def sen_test(msg,access_key,secrete_key):
 
 def sent(request):
      d = request.json
-     #e = {k:v for k,v in d.items() if k not in ('sentiment')}
+     d = {k:v for k,v in d.items() if k not in ('aws_access_key_id','aws_secret_key')}
      cus_date = datetime.datetime.utcnow()
      d['cus_date'] = cus_date 
      access = request.json['aws_access_key_id']
