@@ -13,7 +13,7 @@ from send_SMS import indexsendSMS
 from txt_to_pdf import genpdf
 #sentiment
 from sentiment_insert import sentiment
-from sen_cap import sent
+from sent_cap import sent
 
 #---------------------------------------------------
 from botinsert import fun
