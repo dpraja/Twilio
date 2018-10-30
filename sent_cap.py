@@ -21,7 +21,7 @@ def sen_test(msg,access_key,secrete_key):
     #print(json.dumps(result))
     return (test)
 
-def sentiment(request):
+def sent(request):
      d = request.json
      #e = {k:v for k,v in d.items() if k not in ('sentiment')}
      cus_date = datetime.datetime.utcnow()
