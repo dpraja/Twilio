@@ -13,6 +13,7 @@ from send_SMS import indexsendSMS
 from txt_to_pdf import genpdf
 #sentiment
 from sentiment_insert import sentiment
+from sen_cap import sent
 
 #---------------------------------------------------
 from botinsert import fun
@@ -72,6 +73,10 @@ def bot():
 @app.route('/sentiment',methods=['POST'])
 def test():
    return sentiment(request)
+
+@app.route('/sentiment_cap',methods=['POST'])
+def testing():
+   return sent(request)
 
 if __name__ == "__main__":
   app.run(debug=True)
