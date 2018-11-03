@@ -20,16 +20,18 @@ def sen_test(msg,access_key,secrete_key):
     '''
     #print(json.dumps(result))
     return (test)
-
 def sent(request):
      d = request.json
-     d = {k:v for k,v in d.items() if k not in ('aws_access_key_id','aws_secret_key')}
+     print(d)
+     a = {k:v for k,v in d.items() if k not in ('key_id','key')}
+     e = {k:v for k,v in d.items() if k  in ('key_id','key')}
+     print(e)
      cus_date = datetime.datetime.utcnow()
-     d['cus_date'] = cus_date 
-     access = request.json['aws_access_key_id']
-     secret = request.json['aws_secret_key']
-     sendforsentiment = sen_test(d['transcript_text'],access,secret)
-     d['sentiment'] = sendforsentiment
-     print('asdf',d['sentiment'])
-     gensql('insert', 'sentiment.sentiment',d)
+     a['cus_date'] = cus_date 
+     access =e['key_id']
+     secret = e['key']
+     sendforsentiment = sen_test(d['trans_text'],access,secret)
+     a['sentiment'] = sendforsentiment
+     print('asdf',a['sentiment'])
+     gensql('insert', 'sentiment.sentimentcaps',a)
      return(json.dumps({'Status': 'Success','Message': 'Data Insert Sucessfully'},indent=4))
