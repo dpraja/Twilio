@@ -7,6 +7,14 @@ import json
 
 def index(request):
     country_code=request.json['country_code']
+    
+    
+    if country_code.find('+') != -1:
+        pass
+    else:
+        country_code = '+'+country_code
+    print("country_code", country_code)
+    
     mobile_number = request.json['mobile_number']
     mobile=country_code + mobile_number
     authkey_msg91 = '195833ANU0xiap5a708d1f'
