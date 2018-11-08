@@ -10,7 +10,7 @@ def index(request):
     mobile_number = request.json['mobile_number']
     mobile=country_code + mobile_number
     authkey_msg91 = '195833ANU0xiap5a708d1f'
-    c = random.randint(0,99999999)
+    c = random.randint(0,999999)
     print(c)
     otp_generate = str(c)
     
