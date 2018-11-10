@@ -7,6 +7,11 @@ def indexverifyOTP(request):
     otp_num = request.json['otp_num']
     country_code=request.json['country_code']
     mobile_number = request.json['mobile_number']
+         
+    if country_code.find('+') != -1:
+        pass
+    else:
+        country_code = '+'+country_code
     mobile=country_code + mobile_number
     print(mobile)
     authkey_msg91 = '195833ANU0xiap5a708d1f'
