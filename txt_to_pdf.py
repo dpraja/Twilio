@@ -76,7 +76,7 @@ def genpdf():
     pdf.cell(10)
     pdf.cell(0, 5, 'Hotel Manager', ln=1, align="L")
 
-    pdf.output('booking_confirmation_pdf_file.pdf','F')
+    pdf.output('uploadpdf/booking_confirmation_pdf_file.pdf','F')
 
     return json.dumps({"Return":"sucess"})
 
