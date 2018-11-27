@@ -1,4 +1,6 @@
 from fpdf import FPDF, HTMLMixin
+import requests
+import json
  
 def genpdf(request):
             
