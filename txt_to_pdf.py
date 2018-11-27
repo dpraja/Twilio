@@ -1,6 +1,6 @@
 from fpdf import FPDF, HTMLMixin
  
-def genpdf():
+def genpdf(request):
             
     class HTML2PDF(FPDF, HTMLMixin):
         pass
