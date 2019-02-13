@@ -24,11 +24,11 @@ CORS(app)
 def hello():
    return ("Hello Twilio")
 
-@app.route('/send_OTP',methods=['POST'])
+@app.route('/send_OTP',methods=['GET','POST'])
 def indexotp():
    return index(request)
 
-@app.route('/SMS_verify_OTP',methods=['POST'])
+@app.route('/SMS_verify_OTP',methods=['GET','POST'])
 def verify():
    return indexverifyOTP(request)
 
@@ -80,4 +80,4 @@ def testing():
 
 if __name__ == "__main__":
   app.run(debug=True)
-  #app.run(host="192.168.56.1",port=5000)
+  #app.run(host="192.168.1.29",port=5000)
