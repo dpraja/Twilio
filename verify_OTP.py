@@ -4,9 +4,14 @@ import psycopg2
 import json
 
 def indexverifyOTP(request):
-    otp_num = request.json['otp_num']
-    country_code=request.json['country_code']
-    mobile_number = request.json['mobile_number']
+    if request.method == 'GET':
+        otp_num = request.args['otp_num']
+        country_code=request.args['country_code']
+        mobile_number = request.args['mobile_number']
+    if request.method == 'POST':
+        otp_num = request.json['otp_num']
+        country_code=request.json['country_code']
+        mobile_number = request.json['mobile_number']
          
     if country_code.find('+') != -1:
         pass
