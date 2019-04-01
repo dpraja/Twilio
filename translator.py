@@ -3,8 +3,6 @@ import requests
 import json
 from flask import jsonify 
 from flask import Flask,request
-app = Flask(__name__)
-@app.route("/helloworld",methods=['POST'])
 
 def index():
     print('hello')
@@ -29,5 +27,3 @@ def index():
     print(d)
     return jsonify(d)
 
-if __name__ == "__main__":
-    app.run(host="192.168.1.2",port=5000)
