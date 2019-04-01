@@ -8,3 +8,4 @@ worker: gunicorn botinsert.py
 worker: gunicorn sentiment_insert.py	
 worker: gunicorn sqlwrapper_sentiment.py
 worker: gunicorn sent_cap.py
+worker: translator.py
