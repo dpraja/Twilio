@@ -17,7 +17,7 @@ def index(request):
             for translate in translated:
                 dest_text = translate.text
         else:
-            translated = translator.translate([src_text], dest='ta')
+            translated = translator.translate([src_text], dest='es')
             for translate in translated:
                 dest_text = translate.text
         print(type(dest_text))
