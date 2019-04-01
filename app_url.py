@@ -14,7 +14,8 @@ from txt_to_pdf import genpdf
 #sentiment
 from sentiment_insert import sentiment
 from sent_cap import sent
-
+#----------translator-----------#
+from translator import index
 #---------------------------------------------------
 from botinsert import fun
 app = Flask(__name__)
@@ -59,7 +60,11 @@ def Smstwilioservice_all():
 @app.route('/CheckConfirmation',methods=['POST'])
 def CheckConfirmation_all():
    return CheckConfirmation(request)
+#----------------translator----------#
 
+@app.route('/trans',methods=['POST'])
+def Translator():
+   return index(request)
 
 
 #------------------------------------
