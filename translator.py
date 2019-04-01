@@ -4,7 +4,7 @@ import json
 from flask import jsonify 
 from flask import Flask,request
 
-def index(request):
+def index():
     print('hello')
     src_text = request.json['src_text']
     #src_text = "welcome to other world"
@@ -26,4 +26,3 @@ def index(request):
     d['Return'] = dest_text
     print(d)
     return jsonify(d)
-
