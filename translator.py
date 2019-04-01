@@ -12,7 +12,7 @@ def index(request):
     langs = translator.detect([src_text])
     for lang in langs:
         src_lang = lang.lang
-        if src_lang == 'ko':
+        if src_lang == 'es':
             translated = translator.translate([src_text], dest='en')
             for translate in translated:
                 dest_text = translate.text
