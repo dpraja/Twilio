@@ -3,7 +3,7 @@ import requests
 import json
 from flask import jsonify 
 from flask import Flask,request
-def index(request):
+def translatortamil(request):
     print('hello')
     src_text = request.json['src_text']
     #src_text = "welcome to other world"
