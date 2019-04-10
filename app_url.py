@@ -15,7 +15,7 @@ from txt_to_pdf import genpdf
 from sentiment_insert import sentiment
 from sent_cap import sent
 #----------translator-----------#
-from translator import index
+from translator import translatortamil
 #---------------------------------------------------
 from botinsert import fun
 app = Flask(__name__)
@@ -64,7 +64,7 @@ def CheckConfirmation_all():
 
 @app.route('/trans',methods=['POST'])
 def Translator():
-   return index(request)
+   return translatortamil(request)
 
 
 #------------------------------------
